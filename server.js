@@ -7,6 +7,9 @@ app.get('/dash/weather', (req, res) => {
   request({
     uri: `https://api.darksky.net/forecast/${darksky}/${lat},${long}`
   })
+  .on('response', (response) => {
+    console.log('response sent')
+  })
   .pipe(res)
 })
 
@@ -24,6 +27,6 @@ app.get('/dash/jrxps', (req, res) => {
   .pipe(res)
 })
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(3001, function () {
+  console.log('Example app listening on port 3001!')
 })
