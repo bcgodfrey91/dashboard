@@ -1,10 +1,19 @@
 const express = require('express');
 const request = require('request');
-const { darksky, lat, long } = require('./env.json');
+const { darksky, lat, long, pagespeeds, irx, jrx } = require('./env.json');
 const app = express();
 
 app.get('/dash/weather', (req, res) => {
-  request({ uri: `https://api.darksky.net/forecast/${darksky}/${lat},${long}`})
+  request({
+    uri: `https://api.darksky.net/forecast/${darksky}/${lat},${long}`
+  })
+  .pipe(res)
+})
+
+app.get('/dash/irxps', (req, res) => {
+  request({
+    uri: `https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=${irx}/speed/pagespeed/insights/&strategy=mobile&key=${pagespeeds}`
+  })
   .pipe(res)
 })
 
