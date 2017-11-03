@@ -17,6 +17,13 @@ app.get('/dash/irxps', (req, res) => {
   .pipe(res)
 })
 
+app.get('/dash/jrxps', (req, res) => {
+  request({
+    uri: `https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=${jrx}/speed/pagespeed/insights/&strategy=mobile&key=${pagespeeds}`
+  })
+  .pipe(res)
+})
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
