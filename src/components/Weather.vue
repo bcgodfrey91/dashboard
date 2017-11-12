@@ -7,14 +7,17 @@
 <script>
 export default {
   name: 'Weather',
-  data() {
-  },
   methods: {
     fetchWeather: () => {
+      const headers = new Headers();
+      headers.append('Content-Type', 'application/json');
       fetch('/dash/weather', {
         method: 'GET',
+        headers,
       })
-      .then(response => console.log(response));
+      .then(response => response.json())
+      .then(data => JSON.parse(data.body))
+      .then(body => console.log(body.hourly));
     },
   },
   mounted() {

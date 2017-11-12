@@ -4,13 +4,9 @@ const { darksky, lat, long, pagespeeds, irx, jrx } = require('./env.json');
 const app = express();
 
 app.get('/dash/weather', (req, res) => {
-  request({
-    uri: `https://api.darksky.net/forecast/${darksky}/${lat},${long}`
+  request.get(`https://api.darksky.net/forecast/${darksky}/${lat},${long}`, function (error, response, body) {
+    res.json({ body });
   })
-  .on('response', (response) => {
-    console.log('response sent')
-  })
-  .pipe(res)
 })
 
 app.get('/dash/irxps', (req, res) => {
